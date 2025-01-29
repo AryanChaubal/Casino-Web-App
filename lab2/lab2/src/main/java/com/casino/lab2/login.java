@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author student
  */
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+public class login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,7 +72,7 @@ public class Login extends HttpServlet {
            uf.addBook(new BookBorrowed("Leshante", "Romain Rolland", new SimpleDateFormat("YYYY-MM-dd").parse("2021-02-01"), true));
            uf.addBook(new BookBorrowed("John Kristof", "Romain Rolland", new SimpleDateFormat("YYYY-MM-dd").parse("2021-01-20"), false));
        } catch (ParseException ex) {
-           Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
            System.out.println("Error");
        }
         return uf;
