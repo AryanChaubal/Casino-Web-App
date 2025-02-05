@@ -5,8 +5,7 @@
 --%>
 
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" import="ryerson.ca.lab2.BookBorrowed"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="com.casino.lab2.AccountInfo"%>
 <!DOCTYPE html>
 
 
@@ -14,7 +13,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Your Book</title>
+        <title>Your Account Information</title>
     </head>
     <style>
 
@@ -24,44 +23,45 @@ body {
 }
 </style>
 <% 
-    ArrayList<BookBorrowed> books= (ArrayList)request.getAttribute("booksBorrowedInfo");
-  
+    AccountInfo account = (AccountInfo) request.getAttribute("userInfo");
+    String username = (String) session.getAttribute("username");
+    if(username == null){
+        username = "Guest";
+    }    
 %>
 
-<center><h2>Hello <%=session.getAttribute("uname")%></h2></center>
+
+<center><h2>Hello <%=session.getAttribute("username")%></h2></center>
 <br>
-<center><h3> The following is your books</h3></center>
+<center><h3> Account Details</h3></center>
 <br>
 <form action="Extend" method="post">
 <table border="2" align="center" cellpadding="5" cellspacing="5">
 
 <tr>
    
-<th> Name </th>
-<th> Author </th>
-<th> Due Date </th>
-<th> Extend </th>
+<th> Display Name </th>
+<th> Account Name </th>
+<th> Email </th>
+<th> Balance </th>
 
 </tr>
+<%
 
-    <% for(BookBorrowed book: books){
-    %>
-<tr>
-<td> <%=book.getBookName()%> </td>
-<td> <%=book.getBookAuthor()%></td>
-<td> <%=new SimpleDateFormat("yyyy-MM-dd").format(book.getDueDate())%></td>
-<% if (book.isAvailable()){
-%>
-<td> <input type="submit" value="Extend" ></td>
-<%}
-
-else {
+if (account != null) {
 %>
 
-
-<td> "The book is not available for extension"</td>
-<% }}
-%>
+    <tr>
+        <td> <%= account.getDisplayName() %> </td>
+        <td> <%= account.getAccountName() %> </td>
+        <td> <%= account.getEmail() %> </td>
+        <td> <%= account.getBalance() %> </td>
+    </tr>
+<% } else { %>
+    <tr>
+        <td colspan="4">No account information available.</td>
+    </tr>
+<% } %>
 </tr>
 </table>
 </form>

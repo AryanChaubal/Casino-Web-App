@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author student
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
+@WebServlet(name = "Login", urlPatterns = {"/login"})
 public class login extends HttpServlet {
 
     /**
@@ -40,42 +40,27 @@ public class login extends HttpServlet {
         String username=(String) request.getParameter("username");
         String password=(String) request.getParameter("password");
         
-        UserInfo uinfo=getUserInfo(username, password);
+        AccountInfo accinfo =getAccountInfo(username, password);
         
-        if (uinfo==null){
+        if (accinfo==null){
             RequestDispatcher rd= request.getRequestDispatcher("loginfailed.jsp");
             rd.forward(request, response);
-        }
+        }       
         else{
-            request.getSession().setAttribute("uname", username);
-            request.setAttribute("booksBorrowedInfo", uinfo.getBookBorrowed());
+            request.getSession().setAttribute("username", username);
+            request.setAttribute("userInfo", accinfo);
+            response.sendRedirect("account.jsp");
             
-            RequestDispatcher rd= request.getRequestDispatcher("userbooks.jsp");
-            rd.forward(request, response);
-            
-        }
-        
-        
-     
+        }     
     }
 
-    private UserInfo getUserInfo(String uname, String password) {
+    private AccountInfo getAccountInfo(String username, String password) {
         /**
-         * to be completed. For now, we just return a user info object that has a default book in a default date;
-         * This method must return null when user name and password is incorrect
-         * otherwise it must return an object containing all books that have been borrowed by the user, in addition to user information like name, address, ...
+         * to be completed. For now returns example user information
          */
-        UserInfo uf= new UserInfo();
+        AccountInfo user= new AccountInfo(username, "Jhon Doe", password, "example@domain.com");
    
-        
-       try {
-           uf.addBook(new BookBorrowed("Leshante", "Romain Rolland", new SimpleDateFormat("YYYY-MM-dd").parse("2021-02-01"), true));
-           uf.addBook(new BookBorrowed("John Kristof", "Romain Rolland", new SimpleDateFormat("YYYY-MM-dd").parse("2021-01-20"), false));
-       } catch (ParseException ex) {
-           Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-           System.out.println("Error");
-       }
-        return uf;
+        return user;
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

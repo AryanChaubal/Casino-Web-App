@@ -16,14 +16,16 @@
     </style>
 </head>
 <body>
-    <h2>Login</h2>
-    <form>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Log In</button>
-    </form>
-    <button class="back-button" onclick="location.href='homepage.html'">Back</button>
+    <h2>login</h2>
+        <form action="login" method="post">
+            <label>Username:</label>
+                <input type="text" name="username" size="30">
+
+            <label>Password:</label>
+                <input type="password" name="password" size="30">
+
+            <input type="submit" value="login">
+        </form> 
+    <button class="back-button" onclick="location.href='index.html'">Back</button>
 </body>
 </html>
