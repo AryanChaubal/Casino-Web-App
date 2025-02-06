@@ -23,7 +23,7 @@ body {
 }
 </style>
 <% 
-    AccountInfo account = (AccountInfo) request.getAttribute("userInfo");
+    AccountInfo account = (AccountInfo) session.getAttribute("userInfo");
     String username = (String) session.getAttribute("username");
     if(username == null){
         username = "Guest";
