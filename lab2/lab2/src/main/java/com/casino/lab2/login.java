@@ -48,7 +48,7 @@ public class login extends HttpServlet {
         }       
         else{
             request.getSession().setAttribute("username", username);
-            request.setAttribute("userInfo", accinfo);
+            request.getSession().setAttribute("userInfo", accinfo);
             response.sendRedirect("account.jsp");
             
         }     

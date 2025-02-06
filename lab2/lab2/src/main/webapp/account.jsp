@@ -31,7 +31,7 @@ body {
 %>
 
 
-<center><h2>Hello <%=session.getAttribute("username")%></h2></center>
+<center><h2>Hello <%=username%></h2></center>
 <br>
 <center><h3> Account Details</h3></center>
 <br>
@@ -52,10 +52,10 @@ if (account != null) {
 %>
 
     <tr>
-        <td> <%= account.getDisplayName() %> </td>
-        <td> <%= account.getAccountName() %> </td>
-        <td> <%= account.getEmail() %> </td>
-        <td> <%= account.getBalance() %> </td>
+        <td> <%=account.getDisplayName()%> </td>
+        <td> <%=account.getAccountName()%> </td>
+        <td> <%=account.getEmail()%> </td>
+        <td> <%=account.getBalance()%> </td>
     </tr>
 <% } else { %>
     <tr>
