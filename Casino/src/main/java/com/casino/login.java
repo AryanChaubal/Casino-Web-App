@@ -1,5 +1,5 @@
 
-package com.casino.lab2;
+package com.casino;
 
 import java.io.IOException;
 import java.io.PrintWriter;

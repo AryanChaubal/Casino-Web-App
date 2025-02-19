@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" import="com.casino.lab2.AccountInfo"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="com.casino.AccountInfo"%>
 <!DOCTYPE html>
 
 
