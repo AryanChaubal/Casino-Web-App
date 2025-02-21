@@ -16,7 +16,7 @@ public class UserInfo {
     String Email;
     float Balance;
 
-    public String getUserName() {
+    public String getUsername() {
         return Username;
     }
 

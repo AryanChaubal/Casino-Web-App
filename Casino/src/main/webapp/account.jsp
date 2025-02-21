@@ -52,8 +52,7 @@ if (account != null) {
 %>
 
     <tr>
-        <td> <%=account.getDisplayName()%> </td>
-        <td> <%=account.getAccountName()%> </td>
+        <td> <%=account.getUsername()%> </td>
         <td> <%=account.getEmail()%> </td>
         <td> <%=account.getBalance()%> </td>
     </tr>

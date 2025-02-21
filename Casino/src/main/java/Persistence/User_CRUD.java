@@ -29,7 +29,7 @@ public class User_CRUD {
         try{
             Connection con = getCon();
             Statement stmt = con.createStatement();
-            String query = "INSERT INTO USERS (username, email, password) VALUES ('"+u.getUserName()+"', '"+u.getPassword()+"', '"+u.getEmail()+"\')";
+            String query = "INSERT INTO USERS (username, email, password) VALUES ('"+u.getUsername()+"', '"+u.getEmail()+"', '"+u.getPassword()+"')";
             stmt.executeUpdate(query);
             s1 = "inserted";
             con.close();
@@ -44,7 +44,7 @@ public class User_CRUD {
         try{
             Connection con = getCon();
             
-            String q = "select * from USERS WHERE username LIKE \'" + username + "\'";
+            String q = "select * from User WHERE username LIKE " + username;
             
             PreparedStatement ps = con.prepareStatement(q);
             ResultSet rs = ps.executeQuery();
