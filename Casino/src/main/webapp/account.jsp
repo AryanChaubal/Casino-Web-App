@@ -63,6 +63,7 @@ if (account != null) {
 <% } %>
 </tr>
 </table>
+<button onclick="location.href='MainMenu.jsp'">Slot Machine</button>
 </form>
 </body>
 </html>
