@@ -3,15 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.casino;
+package Business;
 
+import Helper.UserInfo;
+import Persistence.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jdk.vm.ci.code.Register;
 
 /**
  *
@@ -24,12 +29,22 @@ public class register extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-
-        // Mock user registration (Replace with DB storage)
-        System.out.println("User Registered: " + username + ", Email: " + email);
-
-        response.sendRedirect("login.html"); // Redirect to login
-    }
+        
+        UserInfo user = new UserInfo(username, password, email);
+        User_CRUD ucrud = new User_CRUD();
+        
+         try{
+            String s1 = ucrud.create(user);
+            if(s1.equalsIgnoreCase("inserted")){
+                request.getRequestDispatcher("login.html").forward(request, response);
+            }else{
+                System.out.println("error");
+            }
+        }catch (IOException ex){
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        request.getRequestDispatcher("index.html").forward(request, response);
+        }
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -42,7 +57,7 @@ public class register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          doPost(request, response);
+        doPost(request, response);
     }
 
     /**

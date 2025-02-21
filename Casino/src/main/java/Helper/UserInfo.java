@@ -3,26 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.casino;
+package Helper;
 
 /**
  *
  * @author student
  */
-public class AccountInfo {
+public class UserInfo {
     
-    String DisplayName;
-    String AccountName;
+    String Username;
     String Password;
     String Email;
     float Balance;
 
-    public String getDisplayName() {
-        return DisplayName;
-    }
-
-    public String getAccountName() {
-        return AccountName;
+    public String getUserName() {
+        return Username;
     }
 
     public String getPassword() {
@@ -37,9 +32,8 @@ public class AccountInfo {
         return this.Balance;
     }
     
-    public AccountInfo(String DisplayName, String AccountName, String Password, String Email){
-        this.DisplayName = DisplayName;
-        this.AccountName = AccountName;
+    public UserInfo(String Username, String Password, String Email){
+        this.Username = Username;
         this.Password = Password;
         this.Email = Email;
         this.Balance = 0;

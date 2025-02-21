@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" import="com.casino.AccountInfo"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="Helper.UserInfo"%>
 <!DOCTYPE html>
 
 
@@ -23,7 +23,7 @@ body {
 }
 </style>
 <% 
-    AccountInfo account = (AccountInfo) session.getAttribute("userInfo");
+    UserInfo account = (UserInfo) session.getAttribute("userInfo");
     String username = (String) session.getAttribute("username");
     if(username == null){
         username = "Guest";

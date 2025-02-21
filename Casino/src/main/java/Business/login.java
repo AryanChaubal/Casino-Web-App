@@ -1,6 +1,8 @@
 
-package com.casino;
+package Business;
 
+import Helper.UserInfo;
+import Persistence.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -22,17 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Login", urlPatterns = {"/login"})
 public class login extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     
-
    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,28 +32,20 @@ public class login extends HttpServlet {
         String username=(String) request.getParameter("username");
         String password=(String) request.getParameter("password");
         
-        AccountInfo accinfo =getAccountInfo(username, password);
+        UserInfo userInfo = User_CRUD.read(username, password);
         
-        if (accinfo==null){
-            RequestDispatcher rd= request.getRequestDispatcher("loginfailed.jsp");
+        if (userInfo==null){
+            RequestDispatcher rd= request.getRequestDispatcher("index.html");
             rd.forward(request, response);
         }       
         else{
             request.getSession().setAttribute("username", username);
-            request.getSession().setAttribute("userInfo", accinfo);
-            response.sendRedirect("account.jsp");
-            
+            request.getSession().setAttribute("userInfo", userInfo);
+            RequestDispatcher rd= request.getRequestDispatcher("account.jsp");
+            rd.forward(request, response);
         }     
     }
 
-    private AccountInfo getAccountInfo(String username, String password) {
-        /**
-         * to be completed. For now returns example user information
-         */
-        AccountInfo user= new AccountInfo(username, "Jhon Doe", password, "example@domain.com");
-   
-        return user;
-    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
