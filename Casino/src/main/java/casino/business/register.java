@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business;
+package casino.business;
 
-import Helper.UserInfo;
-import Persistence.*;
+import casino.persistence.User_CRUD;
+import casino.helper.UserInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;

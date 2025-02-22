@@ -1,11 +1,11 @@
-package Persistence;
+package casino.persistence;
 
 /**
  *
  * @author student
  */
 
-import Helper.*;
+import casino.helper.UserInfo;
 import java.sql.*;
 
 
