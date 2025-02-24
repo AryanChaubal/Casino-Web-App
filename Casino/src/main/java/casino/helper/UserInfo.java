@@ -32,10 +32,10 @@ public class UserInfo {
         return this.Balance;
     }
     
-    public UserInfo(String Username, String Password, String Email){
+    public UserInfo(String Username, String Password, String Email, float Balance){
         this.Username = Username;
         this.Password = Password;
         this.Email = Email;
-        this.Balance = 0;
+        this.Balance = Balance;
     }
 }

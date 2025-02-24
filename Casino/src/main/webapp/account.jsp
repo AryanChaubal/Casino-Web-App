@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" import="Helper.UserInfo"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="casino.helper.UserInfo"%>
 <!DOCTYPE html>
 
 
@@ -40,8 +40,7 @@ body {
 
 <tr>
    
-<th> Display Name </th>
-<th> Account Name </th>
+<th> Username </th>
 <th> Email </th>
 <th> Balance </th>
 

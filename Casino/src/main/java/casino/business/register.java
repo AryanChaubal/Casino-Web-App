@@ -30,7 +30,7 @@ public class register extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         
-        UserInfo user = new UserInfo(username, password, email);
+        UserInfo user = new UserInfo(username, password, email, 0);
         User_CRUD ucrud = new User_CRUD();
         
          try{

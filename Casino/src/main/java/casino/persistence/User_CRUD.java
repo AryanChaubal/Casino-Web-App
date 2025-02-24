@@ -15,7 +15,7 @@ public class User_CRUD {
         Connection con = null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/CHAT?autoReconnect=true&useSSL=false","root","student");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/CWA?autoReconnect=true&useSSL=false","root","student");
             System.out.println("Connection established.");
 	}catch(Exception e){System.out.println(e);
         }
@@ -44,7 +44,7 @@ public class User_CRUD {
         try{
             Connection con = getCon();
             
-            String q = "select * from User WHERE username LIKE " + username;
+            String q = "select * from User WHERE username LIKE \'" + username+"\'";
             
             PreparedStatement ps = con.prepareStatement(q);
             ResultSet rs = ps.executeQuery();
@@ -52,9 +52,10 @@ public class User_CRUD {
                 String email = rs.getString("email");
                 String uname = rs.getString("username");
                 String pw = rs.getString("password");
+                float bal = (rs.getFloat("balance"));
                 
                 if(pw.equals(password)){
-                    bean = new UserInfo(uname,pw,email);
+                    bean = new UserInfo(uname,pw,email, bal);
                 }  
             }
             con.close();
