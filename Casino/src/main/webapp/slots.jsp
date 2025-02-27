@@ -1,31 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="herlper.UserInfo" %>
+<%@ page import="pageNumber.*, java.util.*" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slot Machine</title>
     <style>
         body { text-align: center; font-family: Arial, sans-serif; }
-        .slot-machine { margin-top: 50px; }
-        .reels { font-size: 24px; margin: 20px; }
-        .result { font-weight: bold; margin-top: 10px; }
+        .slot-container { margin: 50px auto; padding: 20px; border: 2px solid black; width: 300px; }
+        .slot-result { font-size: 24px; margin: 20px 0; }
+        .spin-button { padding: 10px 20px; font-size: 18px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <h1>Slot Machine</h1>
-    <div class="slot-machine">
-        <div class="reels">
-            [ <%= request.getAttribute("reel1") != null ? request.getAttribute("reel1") : "?" %> |
-              <%= request.getAttribute("reel2") != null ? request.getAttribute("reel2") : "?" %> |
-              <%= request.getAttribute("reel3") != null ? request.getAttribute("reel3") : "?" %> ]
-        </div>
-        <form action="SlotMachineServlet" method="post">
-            <button type="submit">Spin</button>
-        </form>
-        <p class="result">
-            <%= request.getAttribute("result") != null ? request.getAttribute("result") : "" %>
-        </p>
+    <h1>Welcome to the Slot Machine</h1>
+    <div class="slot-container">
+        <%
+            HttpSession sessionObj = request.getSession(false);
+            UserInfo account = (sessionObj != null) ? (UserInfo) sessionObj.getAttribute("userInfo") : null;
+            double balance = (account != null) ? account.getBalance() : 0.0;
+        %>
+        <h3>Your Balance: $<%= balance %></h3>
+        
+        <% if (account == null) { %>
+            <h3>Please <a href='login.jsp'>Login</a> to play.</h3>
+        <% } else { %>
+            <form action="SlotMachine" method="get">
+                <label for="bet">Enter your bet:</label>
+                <input type="number" id="bet" name="bet" min="1" max="<%= (int) balance %>" required>
+                <button type="submit" class="spin-button">Spin</button>
+            </form>
+        <% } %>
     </div>
 </body>
 </html>

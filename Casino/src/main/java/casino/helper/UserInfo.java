@@ -1,41 +1,46 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package casino.helper;
 
 /**
- *
- * @author student
+ * Class to represent user information.
  */
 public class UserInfo {
     
-    String Username;
-    String Password;
-    String Email;
-    float Balance;
+    private String username;
+    private String password;
+    private String email;
+    private float balance;
 
+    // Getter methods
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
-            
-    public float getBalance(){
-        return this.Balance;
+
+    public float getBalance() {
+        return this.balance;
     }
-    
-    public UserInfo(String Username, String Password, String Email, float Balance){
-        this.Username = Username;
-        this.Password = Password;
-        this.Email = Email;
-        this.Balance = Balance;
+
+    // Setter methods
+    public void setBalance(float amount) {
+        this.balance = amount;
+    }
+
+    public void incrementBalance(float amount) {
+        this.balance += amount;
+    }
+
+    // Constructor to initialize the user info
+    public UserInfo(String username, String password, String email, float balance) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.balance = balance;
     }
 }
