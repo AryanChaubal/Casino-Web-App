@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package casino.business;
 
 import casino.persistence.User_CRUD;
@@ -16,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jdk.vm.ci.code.Register;
+//import jdk.vm.ci.code.Register;
 
 /**
  *
@@ -41,7 +36,7 @@ public class register extends HttpServlet {
                 System.out.println("error");
             }
         }catch (IOException ex){
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
             }
         request.getRequestDispatcher("index.html").forward(request, response);
         }
