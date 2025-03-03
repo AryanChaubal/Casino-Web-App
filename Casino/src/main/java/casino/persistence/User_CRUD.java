@@ -67,7 +67,7 @@ public class User_CRUD {
         String result = "Error updating balance";
         try {
             Connection con = getCon();
-            String query = "UPDATE User SET balance ="+u.getBalance()+" WHERE username = "+u.getUsername;
+            String query = "UPDATE User SET balance ="+u.getBalance()+" WHERE username = "+u.getUsername();
             PreparedStatement ps = con.prepareStatement(query);
             int rowsUpdated = ps.executeUpdate();
             if (rowsUpdated > 0) {

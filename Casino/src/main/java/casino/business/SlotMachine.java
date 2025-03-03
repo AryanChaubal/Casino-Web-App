@@ -1,3 +1,6 @@
+package casino.business;
+
+import casino.helper.UserInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
@@ -54,7 +57,7 @@ public class SlotMachine extends HttpServlet {
             out.println("<h3>Try again!</h3>");
         }
         
-        account.setBalance(balance);
+        account.setBalance((float) balance);
         session.setAttribute("userInfo", account);
         out.println("<h3>Your balance: $" + balance + "</h3>");
         out.println("<a href='index.jsp'>Back to Slots</a>");
