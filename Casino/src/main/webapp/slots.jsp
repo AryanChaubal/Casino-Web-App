@@ -22,7 +22,7 @@
             font-weight: bold;
             margin: 20px 0;
         }
-        .spin-button, .back-button {
+        .spin-button {
             padding: 10px 20px;
             font-size: 18px;
             cursor: pointer;
@@ -30,6 +30,14 @@
         }
         .betting-section {
             margin-top: 40px;
+        }
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
     <script>
@@ -55,20 +63,10 @@
 
     <h1>Welcome to the Slot Machine</h1>
 
-    <!-- Default Slot Machine Display -->
-    <div class="slot-container">
-        <h3>Slot Machine</h3>
-        <div class="slot-result">
-            🍒 | 🍋 | 🍊
-        </div>
-    </div>
-
-    <!-- Betting Section -->
     <div class="betting-section">
-        <%
-            HttpSession sessionObj = request.getSession(false);
-            UserInfo account = (sessionObj != null) ? (UserInfo) sessionObj.getAttribute("userInfo") : null;
-            double balance = (account != null) ? account.getBalance() : 0.0;
+        <% HttpSession sessionObj = request.getSession(false);
+           UserInfo account = (sessionObj != null) ? (UserInfo) sessionObj.getAttribute("userInfo") : null;
+           double balance = (account != null) ? account.getBalance() : 0.0;
         %>
 
         <h3>Your Balance: $<%= balance %></h3>
@@ -84,10 +82,9 @@
         <% } %>
     </div>
 
-    <!-- Results Section (Will be updated dynamically) -->
     <div id="result-section"></div>
-
-    <button onclick="history.back()" class="back-button">Go Back</button>
+    
+    <button class="back-button" onclick="location.href = 'MainMenu.html'">Go Back</button>
 
 </body>
 </html>

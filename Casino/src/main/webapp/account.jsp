@@ -127,7 +127,30 @@
 
     <br><br>
 
-    <button class="back-button" onclick="location.href = 'MainMenu.html'">Slot Machine</button>
+    <center>
+        <button class="game-button" onclick="location.href = 'MainMenu.html'">Play Games</button>
+        <button class="back-button" onclick="location.href = 'index.html'">Logout</button>
+
+    </center>
+
+    <style>
+        .game-button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+
+    </style>
 
 </body>
 </html>

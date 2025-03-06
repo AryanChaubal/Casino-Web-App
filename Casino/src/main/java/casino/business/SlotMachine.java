@@ -37,7 +37,6 @@ public class SlotMachine extends HttpServlet {
             }
         } catch (IllegalArgumentException e) { // This covers both NumberFormatException and IllegalArgumentException
             response.getWriter().println("<h2>Invalid bet amount. Please enter a valid number within your balance.</h2>");
-            response.getWriter().println("<a href='index.jsp'>Go Back</a>");
             return;
         }
 
@@ -61,7 +60,6 @@ public class SlotMachine extends HttpServlet {
         }
 
         response.getWriter().println("<h3>Your balance: $" + balance + "</h3>");
-        response.getWriter().println("<button onclick='window.location.href=\"index.jsp\";'>Go Back</button>");
         response.getWriter().println("</body></html>");
     }
 
