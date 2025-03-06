@@ -2,7 +2,6 @@ package casino.business;
 
 import casino.helper.UserInfo;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,82 +15,71 @@ public class SlotMachine extends HttpServlet {
 
     private static final String[] SYMBOLS = {"Cherry", "Lemon", "Orange", "Plum", "Bell", "Bar", "Seven"};
     private static final Random random = new Random();
-    private static final double MULTIPLIER = 5.0;
+    private static final int WIN_MULTIPLIER = 81;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-
         UserInfo account = (UserInfo) session.getAttribute("userInfo");
+
         if (account == null) {
-            out.println("<html><body>");
-            out.println("<h2>Error: User not logged in.</h2>");
-            out.println("<a href='login.jsp'>Login</a>");
-            out.println("</body></html>");
+            response.sendRedirect("login.jsp");
             return;
         }
 
         double balance = account.getBalance();
-        String betParam = request.getParameter("bet");
-        double bet = betParam != null ? Double.parseDouble(betParam) : 0;
+        double bet;
 
-        if (bet <= 0 || bet > balance) {
-            out.println("<html><body>");
-            out.println("<h2>Invalid bet amount! Your balance: $" + balance + "</h2>");
-            out.println("<a href='index.jsp'>Go Back</a>");
-            out.println("</body></html>");
+        try {
+            bet = Double.parseDouble(request.getParameter("bet"));
+            if (bet <= 0 || bet > balance) {
+                throw new IllegalArgumentException("Invalid bet amount");
+            }
+        } catch (IllegalArgumentException e) { // This covers both NumberFormatException and IllegalArgumentException
+            response.getWriter().println("<h2>Invalid bet amount. Please enter a valid number within your balance.</h2>");
+            response.getWriter().println("<a href='index.jsp'>Go Back</a>");
             return;
         }
 
         balance -= bet;
-        String[] result = spin();
-
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<style>");
-        out.println("body { font-family: Arial, sans-serif; text-align: center; background-color: #f0f0f0; padding: 20px; }");
-        out.println(".container { background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 400px; margin: auto; }");
-        out.println("h2 { color: #333; }");
-        out.println(".slot-result { font-size: 24px; font-weight: bold; margin: 20px 0; }");
-        out.println(".back-button { padding: 10px 20px; font-size: 18px; cursor: pointer; margin-top: 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; }");
-        out.println(".back-button:hover { background-color: #0056b3; }");
-        out.println("</style>");
-        out.println("</head>");
-        out.println("<body>");
-
-        out.println("<div class='container'>");
-        out.println("<h2>Slot Machine Result</h2>");
-        out.println("<div class='slot-result'>" + result[0] + " | " + result[1] + " | " + result[2] + "</div>");
-
-        if (checkWin(result)) {
-            double winnings = bet * MULTIPLIER;
-            balance += winnings;
-            out.println("<h3>Congratulations! You won $" + winnings + "!</h3>");
-        } else {
-            out.println("<h3>Try again!</h3>");
-        }
+        String[] result = spinReels();
+        double winnings = calculateWinnings(result, bet);
+        balance += winnings;
 
         account.setBalance((float) balance);
         session.setAttribute("userInfo", account);
 
-        out.println("<h3>Your balance: $" + balance + "</h3>");
-        out.println("<button class='back-button' onclick='window.history.back();'>Go Back</button>");
-        out.println("</div>");
+        // Display results
+        response.getWriter().println("<html><body>");
+        response.getWriter().println("<h2>Slot Machine Result</h2>");
+        response.getWriter().println("<p>" + result[0] + " | " + result[1] + " | " + result[2] + "</p>");
 
-        out.println("</body>");
-        out.println("</html>");
-    }
-
-    private String[] spin() {
-        String[] result = new String[3];
-        for (int i = 0; i < 3; i++) {
-            result[i] = SYMBOLS[random.nextInt(SYMBOLS.length)];
+        if (winnings > 0) {
+            response.getWriter().println("<h3>Congratulations! You won $" + winnings + "!</h3>");
+        } else {
+            response.getWriter().println("<h3>Try again!</h3>");
         }
-        return result;
+
+        response.getWriter().println("<h3>Your balance: $" + balance + "</h3>");
+        response.getWriter().println("<button onclick='window.location.href=\"index.jsp\";'>Go Back</button>");
+        response.getWriter().println("</body></html>");
     }
 
-    private boolean checkWin(String[] result) {
-        return result[0].equals(result[1]) && result[1].equals(result[2]);
+    /**
+     * Spins the slot reels and returns three random symbols.
+     */
+    private String[] spinReels() {
+        return new String[]{
+            SYMBOLS[random.nextInt(SYMBOLS.length)],
+            SYMBOLS[random.nextInt(SYMBOLS.length)],
+            SYMBOLS[random.nextInt(SYMBOLS.length)]
+        };
+    }
+
+    /**
+     * Calculates winnings based on whether all three columns match.
+     */
+    private double calculateWinnings(String[] result, double bet) {
+        return (result[0].equals(result[1]) && result[1].equals(result[2])) ? bet * WIN_MULTIPLIER : 0;
     }
 }
