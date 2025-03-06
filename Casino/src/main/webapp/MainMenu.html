@@ -8,6 +8,10 @@
             body {
                 text-align: center;
                 font-family: Arial, sans-serif;
+                position: relative;
+                min-height: 100vh;
+                margin: 0;
+                padding-bottom: 60px;
             }
             .menu {
                 margin-top: 50px;
@@ -21,6 +25,14 @@
                 margin: 10px;
                 cursor: pointer;
             }
+            .back-button {
+                position: fixed; /* Makes the button always visible */
+                bottom: 20px; /* Positions the button at the bottom */
+                left: 20px; /* Positions the button on the left */
+                padding: 10px 15px; /* Padding to match the login page */
+                font-size: 16px; /* Font size to match the login page */
+                cursor: pointer; /* Pointer cursor on hover */
+            }
         </style>
     </head>
     <body>
@@ -33,5 +45,6 @@
                 <button onclick="location.href = 'poker.html'">Poker NOT WORKING</button>
             </div>
         </div>
+        <button onclick="location.href = 'account.jsp'" class="back-button">Go Back</button>
     </body>
 </html>
