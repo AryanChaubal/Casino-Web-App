@@ -23,35 +23,32 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Login", urlPatterns = {"/login"})
 public class login extends HttpServlet {
 
-    
-   @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String username=(String) request.getParameter("username");
-        String password=(String) request.getParameter("password");
-        
+
+        String username = (String) request.getParameter("username");
+        String password = (String) request.getParameter("password");
+
         UserInfo userInfo = User_CRUD.read(username, password);
-        
-        if (userInfo==null){
-            RequestDispatcher rd= request.getRequestDispatcher("index.html");
+
+        if (userInfo == null) {
+            RequestDispatcher rd = request.getRequestDispatcher("index.html");
             rd.forward(request, response);
-        }       
-        else{
+        } else {
             request.getSession().setAttribute("username", username);
             request.getSession().setAttribute("userInfo", userInfo);
-            RequestDispatcher rd= request.getRequestDispatcher("account.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("account.jsp");
             rd.forward(request, response);
-        }     
+        }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-          doPost(request, response);
+        doPost(request, response);
 
-        
     }
 
 }

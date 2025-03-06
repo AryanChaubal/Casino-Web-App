@@ -11,8 +11,8 @@ public class User_CRUD {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Updated for MySQL 8+
             con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/CWA?useTimezone=true&serverTimezone=UTC",
-                "root", "root"
+                    "jdbc:mysql://localhost:3306/CWA?useTimezone=true&serverTimezone=UTC",
+                    "root", "root"
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -23,8 +23,7 @@ public class User_CRUD {
     // Create (Register) New User
     public String create(UserInfo u) {
         String query = "INSERT INTO User (username, email, password, balance) VALUES (?, ?, ?, ?)";
-        try (Connection con = getCon();
-             PreparedStatement pstmt = con.prepareStatement(query)) {
+        try (Connection con = getCon(); PreparedStatement pstmt = con.prepareStatement(query)) {
 
             pstmt.setString(1, u.getUsername());
             pstmt.setString(2, u.getEmail());
@@ -44,8 +43,7 @@ public class User_CRUD {
         String query = "SELECT * FROM User WHERE username = ?";
         UserInfo user = null;
 
-        try (Connection con = getCon();
-             PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = getCon(); PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
@@ -69,8 +67,7 @@ public class User_CRUD {
     // Update User Balance
     public static String updateBalance(String username, float newBalance) {
         String query = "UPDATE User SET balance = ? WHERE username = ?";
-        try (Connection con = getCon();
-             PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = getCon(); PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setFloat(1, newBalance);
             ps.setString(2, username);
@@ -86,8 +83,7 @@ public class User_CRUD {
     // Delete User
     public static String deleteUser(String username) {
         String query = "DELETE FROM User WHERE username = ?";
-        try (Connection con = getCon();
-             PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = getCon(); PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, username);
             int rowsDeleted = ps.executeUpdate();

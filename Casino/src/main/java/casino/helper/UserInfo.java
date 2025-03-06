@@ -4,7 +4,7 @@ package casino.helper;
  * Class to represent user information.
  */
 public class UserInfo {
-    
+
     private String username;
     private String password;
     private String email;
