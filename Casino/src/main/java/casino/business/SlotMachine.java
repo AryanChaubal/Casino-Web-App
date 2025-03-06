@@ -37,6 +37,7 @@ public class SlotMachine extends HttpServlet {
             }
         } catch (IllegalArgumentException e) { // This covers both NumberFormatException and IllegalArgumentException
             response.getWriter().println("<h2>Invalid bet amount. Please enter a valid number within your balance.</h2>");
+            response.getWriter().println("<a href='index.jsp'>Go Back</a>");
             return;
         }
 
@@ -48,6 +49,7 @@ public class SlotMachine extends HttpServlet {
         account.setBalance((float) balance);
         session.setAttribute("userInfo", account);
 
+        // Display results
         response.getWriter().println("<html><body>");
         response.getWriter().println("<h2>Slot Machine Result</h2>");
         response.getWriter().println("<p>" + result[0] + " | " + result[1] + " | " + result[2] + "</p>");
@@ -59,6 +61,7 @@ public class SlotMachine extends HttpServlet {
         }
 
         response.getWriter().println("<h3>Your balance: $" + balance + "</h3>");
+        response.getWriter().println("<button onclick='window.location.href=\"index.jsp\";'>Go Back</button>");
         response.getWriter().println("</body></html>");
     }
 
@@ -73,6 +76,9 @@ public class SlotMachine extends HttpServlet {
         };
     }
 
+    /**
+     * Calculates winnings based on whether all three columns match.
+     */
     private double calculateWinnings(String[] result, double bet) {
         return (result[0].equals(result[1]) && result[1].equals(result[2])) ? bet * WIN_MULTIPLIER : 0;
     }
