@@ -74,7 +74,9 @@ public class SlotMachine extends HttpServlet {
         };
     }
 
-
+    /**
+     * Calculates winnings based on whether all three columns match.
+     */
     private double calculateWinnings(String[] result, double bet) {
         return (result[0].equals(result[1]) && result[1].equals(result[2])) ? bet * WIN_MULTIPLIER : 0;
     }
