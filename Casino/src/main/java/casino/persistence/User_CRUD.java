@@ -22,19 +22,22 @@ public class User_CRUD {
 
     // Create (Register) New User
     public String create(UserInfo u) {
-        String query = "INSERT INTO User (username, email, password, balance) VALUES (?, ?, ?, ?)";
-        try (Connection con = getCon(); PreparedStatement pstmt = con.prepareStatement(query)) {
-
-            pstmt.setString(1, u.getUsername());
-            pstmt.setString(2, u.getEmail());
-            pstmt.setString(3, u.getPassword());
-            pstmt.setFloat(4, u.getBalance());
-
-            int rowsInserted = pstmt.executeUpdate();
-            return (rowsInserted > 0) ? "inserted" : "error";
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "error";
+        try{
+            try (Connection con = getCon()) {
+                String query = "INSERT INTO User (username, email, password, balance) VALUES ("
+                        + "('"+u.getUsername()+"', "
+                        + "'"+u.getEmail()+"', "
+                        + "'"+u.getPassword()+"', "
+                        +"'"+u.getBalance()+"');";
+                Statement stmt = con.createStatement();
+                System.out.println(query);
+                stmt.execute(query);
+                con.close();
+                return "true";
+            }
+            }catch(SQLException e){
+                System.out.println(e);
+                return "error";
         }
     }
 
@@ -66,17 +69,20 @@ public class User_CRUD {
 
     // Update User Balance
     public static String updateBalance(String username, float newBalance) {
-        String query = "UPDATE User SET balance = ? WHERE username = ?";
-        try (Connection con = getCon(); PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setFloat(1, newBalance);
-            ps.setString(2, username);
-
-            int rowsUpdated = ps.executeUpdate();
-            return (rowsUpdated > 0) ? "Balance updated successfully!" : "Error updating balance";
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "Error updating balance";
+        try{
+            try (Connection con = getCon()) {
+                String query = "UPDATE User "
+                        + "SET balance = " + newBalance 
+                        + "WHERE username = '" +username+ "';";
+                Statement stmt = con.createStatement();
+                System.out.println(query);
+                stmt.execute(query);
+                con.close();
+                return "Balance updated successfully!";
+            }
+            }catch(SQLException e){
+                System.out.println(e);
+                return "Error updating balance";
         }
     }
 
