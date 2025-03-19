@@ -17,6 +17,15 @@ public class User_CRUD {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Updated for MySQL 8+
+            con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/CWA?useTimezone=true&serverTimezone=UTC",
+                    "root", "student123"
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return con;
     }
 
