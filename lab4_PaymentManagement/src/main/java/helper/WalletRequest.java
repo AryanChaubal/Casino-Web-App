@@ -1,15 +1,15 @@
 package helper;
 
-public class TransactionRequest {
-    private int walletId;
+public class WalletRequest {
+    private String username;
     private double amount;
 
-    public int getWalletId() {
-        return walletId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setWalletId(int walletId) {
-        this.walletId = walletId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public double getAmount() {
