@@ -1,179 +1,47 @@
-/*
- * RESTful Web Service for Payment Management
- */
 package endpoint;
 
-import java.io.StringWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import business.PaymentManagement;
-import helper.WalletXML;
+import business.*;
+import helper.*;
 
-/**
- * RESTful Payment Web Service
- */
-@Path("/payments")
+@Path("/payment")
 public class PaymentResource {
 
-    @Context
-    private UriInfo context;
-
-    public PaymentResource() {
+    @POST
+    @Path("/deposit")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String deposit(TransactionRequest request) {
+        PaymentBusiness business = new PaymentBusiness();
+        boolean success = business.deposit(request.getWalletId(), request.getAmount());
+        return success ? "Deposit successful" : "Deposit failed";
     }
 
-    /**
-     * Endpoint to deposit funds
-     * @param userId The ID of the user
-     * @param amount The deposit amount
-     * @return XML Response of the updated wallet
-     */
-    @Path("/deposit/{userId}/{amount}")
-    @GET
-    @Produces(MediaType.APPLICATION_XML + ";charset=utf-8")
-    public String depositFunds(@PathParam("userId") int userId, 
-                               @PathParam("amount") float amount) {
-        
-        PaymentManagement paymentmanagement = new PaymentManagement();
-        
-        // Business logic for depositing funds
-        WalletXML updatedWallet = paymentmanagement.deposit(userId, amount);
-
-        if (updatedWallet == null) {
-            return "<error>Transaction failed</error>";
-        }
-
-        // Convert WalletXML object to XML
-        try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(WalletXML.class);
-            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            StringWriter sw = new StringWriter();
-            jaxbMarshaller.marshal(updatedWallet, sw);
-
-            return sw.toString();
-            
-        } catch (JAXBException ex) {
-            Logger.getLogger(PaymentResource.class.getName()).log(Level.SEVERE, null, ex);
-            return "<error>XML conversion failed</error>";
-        }
+    @POST
+    @Path("/withdraw")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String withdraw(TransactionRequest request) {
+        PaymentBusiness business = new PaymentBusiness();
+        boolean success = business.withdraw(request.getWalletId(), request.getAmount());
+        return success ? "Withdrawal successful" : "Withdrawal failed";
     }
 
-    /**
-     * Endpoint to withdraw funds
-     * @param userId The ID of the user
-     * @param amount The withdrawal amount
-     * @return XML Response of the updated wallet
-     */
-    @Path("/withdraw/{userId}/{amount}")
     @GET
-    @Produces(MediaType.APPLICATION_XML + ";charset=utf-8")
-    public String withdrawFunds(@PathParam("userId") int userId, 
-                                @PathParam("amount") float amount) {
-        
-        PaymentManagement paymentmanagement = new PaymentManagement();
-        
-        // Business logic for withdrawing funds
-        WalletXML updatedWallet = paymentmanagement.withdraw(userId, amount);
-
-        if (updatedWallet == null) {
-            return "<error>Insufficient funds</error>";
-        }
-
-        // Convert WalletXML object to XML
-        try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(WalletXML.class);
-            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            StringWriter sw = new StringWriter();
-            jaxbMarshaller.marshal(updatedWallet, sw);
-
-            return sw.toString();
-            
-        } catch (JAXBException ex) {
-            Logger.getLogger(PaymentResource.class.getName()).log(Level.SEVERE, null, ex);
-            return "<error>XML conversion failed</error>";
-        }
+    @Path("/balance/{walletId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getBalance(@PathParam("walletId") int walletId) {
+        PaymentBusiness business = new PaymentBusiness();
+        double balance = business.getBalance(walletId);
+        return "Current balance: " + balance;
     }
-    
-    /**
-     * Endpoint to withdraw funds
-     * @param userId The ID of the user
-     * @param amount The withdrawal amount
-     * @return XML Response of the updated wallet
-     */
-    @Path("/withdraw/{userId}/{amount}")
+
     @GET
-    @Produces(MediaType.APPLICATION_XML + ";charset=utf-8")
-    public String Bet(@PathParam("userId") int userId, 
-                                @PathParam("amount") float amount) {
-        
-        PaymentManagement paymentmanagement = new PaymentManagement();
-        
-        // Business logic for withdrawing funds
-        WalletXML updatedWallet = paymentmanagement.bet(userId, amount);
-
-        if (updatedWallet == null) {
-            return "<error>Insufficient funds</error>";
-        }
-
-        // Convert WalletXML object to XML
-        try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(WalletXML.class);
-            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            StringWriter sw = new StringWriter();
-            jaxbMarshaller.marshal(updatedWallet, sw);
-
-            return sw.toString();
-            
-        } catch (JAXBException ex) {
-            Logger.getLogger(PaymentResource.class.getName()).log(Level.SEVERE, null, ex);
-            return "<error>XML conversion failed</error>";
-        }
-    }
-    /**
-     * Endpoint to retrieve the current wallet balance
-     * @param userId The ID of the user
-     * @return XML Response with wallet balance
-     */
-    @Path("/wallet/{userId}")
-    @GET
-    @Produces(MediaType.APPLICATION_XML + ";charset=utf-8")
-    public String getWalletBalance(@PathParam("userId") int userId) {
-        
-        PaymentManagement paymentmanagement = new PaymentManagement();
-        
-        // Fetch wallet balance
-        WalletXML wallet = paymentmanagement.getWallet(userId);
-
-        if (wallet == null) {
-            return "<error>Wallet not found</error>";
-        }
-
-        // Convert WalletXML object to XML
-        try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(WalletXML.class);
-            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            StringWriter sw = new StringWriter();
-            jaxbMarshaller.marshal(wallet, sw);
-
-            return sw.toString();
-            
-        } catch (JAXBException ex) {
-            Logger.getLogger(PaymentResource.class.getName()).log(Level.SEVERE, null, ex);
-            return "<error>XML conversion failed</error>";
-        }
+    @Path("/transactions/{walletId}")
+    @Produces(MediaType.APPLICATION_XML)
+    public TransactionsXML getTransactions(@PathParam("walletId") int walletId) {
+        PaymentBusiness business = new PaymentBusiness();
+        return business.getTransactionsByWallet(walletId);
     }
 }

@@ -4,18 +4,24 @@
  * Created: Mar. 19, 2025
  * This SQL file contains the initalization of the DB on a new system
  */
-CREATE DATABASE PaymentDB;
+-- Create the database
+CREATE DATABASE IF NOT EXISTS casino_payment;
+USE casino_payment;
 
-CREATE TABLE Wallet (
+-- Create the Wallet table
+CREATE TABLE IF NOT EXISTS Wallet (
     wallet_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT,
-    balance DECIMAL(10,2) DEFAULT 0.00
+    user_id INT UNIQUE NOT NULL,
+    balance DECIMAL(10, 2) DEFAULT 0.00
 );
 
-CREATE TABLE Transaction (
-    transaction_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    transaction_type ENUM('Deposit', 'Withdraw', 'Bet') NOT NULL,
-    amount DECIMAL(10,2) NOT NULL,
-    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- Create the TRANSACTION table
+CREATE TABLE IF NOT EXISTS TRANSACTION (
+    transactionID VARCHAR(50) PRIMARY KEY,
+    wallet_id INT NOT NULL,
+    type VARCHAR(20) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    transactionDate VARCHAR(20) NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    FOREIGN KEY (wallet_id) REFERENCES Wallet(wallet_id)
 );
