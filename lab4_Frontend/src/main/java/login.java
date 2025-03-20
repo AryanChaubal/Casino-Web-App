@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "Login", urlPatterns = {"/login"}) // Updated to match frontend
+@WebServlet(name = "Login", urlPatterns = {"/auth/login"}) // Updated to match frontend
 public class login extends HttpServlet {
 
     @Override
@@ -21,7 +21,7 @@ public class login extends HttpServlet {
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
             // If input is invalid, redirect back to the login page with an error message
             request.setAttribute("error", "Username and password are required.");
-            RequestDispatcher rd = request.getRequestDispatcher("/lab4_Frontend/login.html"); // Adjust path as needed
+            RequestDispatcher rd = request.getRequestDispatcher("/frontend/login.html"); // Adjust path as needed
             rd.forward(request, response);
             return;
         }
@@ -32,13 +32,13 @@ public class login extends HttpServlet {
         if (userInfo == null) {
             // If credentials are invalid, redirect back to the login page with an error message
             request.setAttribute("error", "Invalid username or password.");
-            RequestDispatcher rd = request.getRequestDispatcher("/lab4_Frontend/login.html"); // Adjust path as needed
+            RequestDispatcher rd = request.getRequestDispatcher("/frontend/login.html"); // Adjust path as needed
             rd.forward(request, response);
         } else {
             // If credentials are valid, set session attributes and redirect to account page
             request.getSession().setAttribute("username", username);
             request.getSession().setAttribute("userInfo", userInfo);
-            response.sendRedirect("/lab4_Frontend/account.jsp"); // Adjust path as needed
+            response.sendRedirect("/frontend/account.jsp"); // Adjust path as needed
         }
     }
 
@@ -46,6 +46,6 @@ public class login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Redirect GET requests to the login page
-        response.sendRedirect("/lab4_Frontend/login.html"); // Adjust path as needed
+        response.sendRedirect("/frontend/login.html"); // Adjust path as needed
     }
 }
