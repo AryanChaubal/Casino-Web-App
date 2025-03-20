@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import helper.Wallet;
 
 public class Wallet_CRUD {
 
@@ -11,7 +12,7 @@ public class Wallet_CRUD {
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/casino_payment?autoReconnect=true&useSSL=false", "root", "student");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wallet_service?autoReconnect=true&useSSL=false", "root", "student123");
             System.out.println("Connection established.");
         } catch (Exception e) {
             System.out.println(e);
@@ -19,22 +20,24 @@ public class Wallet_CRUD {
         return con;
     }
 
-    public static double getBalance(int walletId) {
-        double balance = 0.0;
+    public static Wallet getWalletByUsername(String username) {
+        Wallet wallet = null;
         try {
             Connection con = getCon();
-            String q = "SELECT balance FROM Wallet WHERE wallet_id = ?";
+            String q = "SELECT * FROM Wallet WHERE username = ?";
             PreparedStatement ps = con.prepareStatement(q);
-            ps.setInt(1, walletId);
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                balance = rs.getDouble("balance");
+                int walletId = rs.getInt("wallet_id");
+                double balance = rs.getDouble("balance");
+                wallet = new Wallet(walletId, username, balance);
             }
             con.close();
         } catch (Exception e) {
             System.out.println(e);
         }
-        return balance;
+        return wallet;
     }
 
     public static boolean updateBalance(int walletId, double amount) {

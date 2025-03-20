@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.HashSet;
-import java.util.Set;
-import helper.*;
+import java.util.ArrayList;
+import java.util.List;
+import helper.Transaction;
 
 public class Transaction_CRUD {
 
@@ -14,7 +14,7 @@ public class Transaction_CRUD {
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/casino_payment?autoReconnect=true&useSSL=false", "root", "student");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wallet_service?autoReconnect=true&useSSL=false", "root", "student123");
             System.out.println("Connection established.");
         } catch (Exception e) {
             System.out.println(e);
@@ -22,16 +22,14 @@ public class Transaction_CRUD {
         return con;
     }
 
-    public static boolean addTransaction(int walletId, String type, double amount, String status) {
+    public static boolean addTransaction(int walletId, String type, double amount) {
         try {
             Connection con = getCon();
-            String q = "INSERT INTO TRANSACTION (transactionID, wallet_id, type, amount, transactionDate, status) VALUES (?, ?, ?, ?, NOW(), ?)";
+            String q = "INSERT INTO Transaction (wallet_id, type, amount, transaction_date) VALUES (?, ?, ?, NOW())";
             PreparedStatement ps = con.prepareStatement(q);
-            ps.setString(1, java.util.UUID.randomUUID().toString()); // Generate a unique transaction ID
-            ps.setInt(2, walletId);
-            ps.setString(3, type);
-            ps.setDouble(4, amount);
-            ps.setString(5, status);
+            ps.setInt(1, walletId);
+            ps.setString(2, type);
+            ps.setDouble(3, amount);
             ps.executeUpdate();
             con.close();
             return true;
@@ -41,22 +39,20 @@ public class Transaction_CRUD {
         }
     }
 
-    public static Set<Transaction> getTransactionsByWallet(int walletId) {
-        Set<Transaction> transactions = new HashSet<>();
+    public static List<Transaction> getTransactionsByWallet(int walletId) {
+        List<Transaction> transactions = new ArrayList<>();
         try {
             Connection con = getCon();
-            String q = "SELECT * FROM TRANSACTION WHERE wallet_id = ?";
+            String q = "SELECT * FROM Transaction WHERE wallet_id = ?";
             PreparedStatement ps = con.prepareStatement(q);
             ps.setInt(1, walletId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String transactionID = rs.getString("transactionID");
+                int transactionId = rs.getInt("transaction_id");
                 String type = rs.getString("type");
                 double amount = rs.getDouble("amount");
-                String transactionDate = rs.getString("transactionDate");
-                String status = rs.getString("status");
-                Transaction transaction = new Transaction(transactionID, walletId, type, amount, transactionDate, status);
-                transactions.add(transaction);
+                String transactionDate = rs.getString("transaction_date");
+                transactions.add(new Transaction(transactionId, walletId, type, amount, transactionDate));
             }
             con.close();
         } catch (Exception e) {
