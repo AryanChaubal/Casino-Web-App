@@ -56,7 +56,6 @@
 
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin for Java 20 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -75,7 +74,8 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
-            </plugin>
+            </plugin><!-- Maven Compiler Plugin for Java 20 -->
+            
 
             <!-- Maven Dependency Plugin to copy dependencies -->
             <plugin>
