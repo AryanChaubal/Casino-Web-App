@@ -14,7 +14,7 @@ public class Transaction_CRUD {
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wallet_service?autoReconnect=true&useSSL=false", "root", "student123");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wallet_service?autoReconnect=true&useSSL=false", "root", "root");
             System.out.println("Connection established.");
         } catch (Exception e) {
             System.out.println(e);
