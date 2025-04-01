@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "register", urlPatterns = {"/auth/register"})
+@WebServlet(name = "register", urlPatterns = {"/register"})
 public class register extends HttpServlet {
 
     @Override
