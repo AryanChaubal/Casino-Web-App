@@ -1,3 +1,6 @@
+package persistence;
+
+import helper.UserInfo;
 import java.sql.*;
 
 public class User_CRUD {

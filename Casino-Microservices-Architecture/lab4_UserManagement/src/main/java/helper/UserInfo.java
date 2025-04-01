@@ -1,3 +1,5 @@
+package helper;
+
 public class UserInfo {
 
     private final String username; // Immutable field

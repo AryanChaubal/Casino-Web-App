@@ -1,3 +1,7 @@
+package business;
+
+import helper.UserInfo;
+import persistence.User_CRUD;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +22,7 @@ public class login extends HttpServlet {
 
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
             request.setAttribute("error", "Username and password are required.");
-            RequestDispatcher rd = request.getRequestDispatcher("/frontend/login.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/lab4_Frontend/login.html");
             rd.forward(request, response);
             return;
         }
@@ -27,18 +31,18 @@ public class login extends HttpServlet {
 
         if (userInfo == null) {
             request.setAttribute("error", "Invalid username or password.");
-            RequestDispatcher rd = request.getRequestDispatcher("/frontend/login.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/lab4_Frontend/login.html");
             rd.forward(request, response);
         } else {
             request.getSession().setAttribute("username", username);
             request.getSession().setAttribute("userInfo", userInfo);
-            response.sendRedirect("/frontend/account.jsp");
+            response.sendRedirect("/lab4_Frontend/account.jsp");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("/frontend/login.html");
+        response.sendRedirect("/lab4_Frontend/login.html");
     }
 }

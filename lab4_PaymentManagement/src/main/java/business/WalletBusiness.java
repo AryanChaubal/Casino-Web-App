@@ -41,5 +41,5 @@ public class WalletBusiness {
         }
         return false;
     }
-    
+
 }

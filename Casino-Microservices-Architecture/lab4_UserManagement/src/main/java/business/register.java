@@ -1,3 +1,7 @@
+package business;
+
+import helper.UserInfo;
+import persistence.User_CRUD;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +27,7 @@ public class register extends HttpServlet {
             password == null || password.isEmpty() ||
             email == null || email.isEmpty()) {
             request.setAttribute("error", "All fields are required.");
-            RequestDispatcher rd = request.getRequestDispatcher("/frontend/register.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/lab4_Frontend/register.html");
             rd.forward(request, response);
             return;
         }
@@ -31,14 +35,14 @@ public class register extends HttpServlet {
         User_CRUD ucrud = new User_CRUD();
         if (ucrud.userExists(username)) {
             request.setAttribute("error", "Username already exists.");
-            RequestDispatcher rd = request.getRequestDispatcher("/frontend/register.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/lab4_Frontend/register.html");
             rd.forward(request, response);
             return;
         }
 
         if (ucrud.emailExists(email)) {
             request.setAttribute("error", "Email already exists.");
-            RequestDispatcher rd = request.getRequestDispatcher("/frontend/register.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/lab4_Frontend/register.html");
             rd.forward(request, response);
             return;
         }
@@ -47,16 +51,16 @@ public class register extends HttpServlet {
         try {
             String result = ucrud.create(user);
             if (result.equalsIgnoreCase("inserted")) {
-                response.sendRedirect("/frontend/login.html");
+                response.sendRedirect("/lab4_Frontend/login.html");
             } else {
                 request.setAttribute("error", "Registration failed. Please try again.");
-                RequestDispatcher rd = request.getRequestDispatcher("/frontend/register.html");
+                RequestDispatcher rd = request.getRequestDispatcher("/lab4_Frontend/register.html");
                 rd.forward(request, response);
             }
         } catch (IOException ex) {
             Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("error", "An error occurred. Please try again.");
-            RequestDispatcher rd = request.getRequestDispatcher("/frontend/register.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/lab4_Frontend/register.html");
             rd.forward(request, response);
         }
     }
@@ -64,7 +68,7 @@ public class register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("/frontend/register.html");
+        response.sendRedirect("/lab4_Frontend/register.html");
     }
 
     @Override
