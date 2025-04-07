@@ -4,7 +4,7 @@
 
     <groupId>casino</groupId>
     <artifactId>lab4_PaymentManagement</artifactId>
-    <version>13</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>lab4_PaymentManagement</name>

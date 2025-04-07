@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slot Machine</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .slot-container {
+            margin: 30px auto;
+            padding: 20px;
+            border: 2px solid black;
+            width: 300px;
+            background-color: #f9f9f9;
+        }
+        .slot-result {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .spin-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .betting-section {
+            margin-top: 40px;
+        }
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        const username = localStorage.getItem("username");
+        if (!username) {
+            window.location.href = "index.html"; // Redirect if not logged in
+        }
+
+        async function fetchBalance() {
+            try {
+                const response = await fetch(`http://localhost:8081/wallet/${username}`);
+                const data = await response.json();
+                document.getElementById("balance").innerText = data.balance.toFixed(2);
+            } catch (error) {
+                console.error("Error fetching balance:", error);
+            }
+        }
+
+        async function playSlotMachine() {
+            const betAmount = parseFloat(document.getElementById("bet").value);
+            if (isNaN(betAmount) || betAmount <= 0) {
+                alert("Please enter a valid bet amount.");
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:8082/game/slotmachine", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, bet: betAmount })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    document.getElementById("result-section").innerHTML = 
+                        `<h3>Result: ${data.result}</h3><h3>New Balance: $${data.newBalance.toFixed(2)}</h3>`;
+                    document.getElementById("balance").innerText = data.newBalance.toFixed(2);
+                } else {
+                    alert(data.message || "Bet failed.");
+                }
+            } catch (error) {
+                console.error("Error playing slot machine:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchBalance);
+    </script>
+</head>
+<body>
+    <h1>Welcome to the Slot Machine</h1>
+
+    <div class="betting-section">
+        <h3>Your Balance: $<span id="balance">Loading...</span></h3>
+
+        <form onsubmit="event.preventDefault(); playSlotMachine();">
+            <label for="bet">Enter your bet:</label>
+            <input type="number" id="bet" name="bet" min="1" required>
+            <button type="submit" class="spin-button">Spin</button>
+        </form>
+    </div>
+
+    <div id="result-section"></div>
+
+    <button class="back-button" onclick="location.href = 'MainMenu.html'">Go Back</button>
+</body>
+</html>
