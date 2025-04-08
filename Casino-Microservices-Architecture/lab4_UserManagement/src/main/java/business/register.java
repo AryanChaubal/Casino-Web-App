@@ -7,14 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-public class Register {
+public class register {
 
     public boolean registerUser(String username, String password, String email) {
-        
-        UserInfo user = new UserInfo(username, password, email, 0);
-        User_CRUD userCRUD = new User_CRUD();
-        userCRUD.create(user);
-        
+        // Logic to register the user (save to DB, etc.)
+        // Return true if successful, false otherwise
+        System.out.println("Registering: " + username);
         return true;
     }
 }

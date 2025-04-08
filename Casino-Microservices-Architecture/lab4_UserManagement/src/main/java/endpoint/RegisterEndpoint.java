@@ -3,7 +3,7 @@ package endpoint;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import business.Register;
+import business.register;
 
 @Path("/register")
 public class RegisterEndpoint {
@@ -16,9 +16,9 @@ public class RegisterEndpoint {
         @FormParam("password") String password, 
         @FormParam("email") String email) {
 
-        Register register = new Register();
+        register registerBusiness = new register();
 
-        boolean success = register.registerUser(username, password, email);
+        boolean success = registerBusiness.registerUser(username, password, email);
 
         if (success) {
             return Response.status(Response.Status.CREATED)

@@ -9,19 +9,13 @@ public class User_CRUD {
     private static Connection getCon() {
         Connection con = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Updated for MySQL 8+
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/?useTimezone=true&serverTimezone=UTC",
-                    "root", "root"); // Make sure credentials are correct
-        } catch (ClassNotFoundException e) {
-            System.out.println("JDBC Driver not found.");
+                    "jdbc:mysql://localhost:3306/userDB?useTimezone=true&serverTimezone=UTC",
+                    "root", "root" // Update username and password as needed
+            );
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("Database connection failed.");
-            e.printStackTrace();
-        }
-        if (con == null) {
-            System.out.println("Connection was not established.");
         }
         return con;
     }
