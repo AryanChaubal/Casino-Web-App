@@ -11,55 +11,35 @@
 
 
     <properties>
-<<<<<<< HEAD:Casino-Microservices-Architecture/lab4_GameManagement/pom.xml
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>8.0.0</jakartaee>
-=======
-        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Setting Java version for Maven compilation -->
-        <maven.compiler.source>20</maven.compiler.source>
-        <maven.compiler.target>20</maven.compiler.target>
->>>>>>> parent of deaee41 (attempting to fix the urls):lab4_GameManagement/pom.xml
     </properties>
     
     <dependencies>
         <dependency>
-<<<<<<< HEAD:Casino-Microservices-Architecture/lab4_GameManagement/pom.xml
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
             <version>2.3.3</version>
         </dependency>
 
-=======
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.23</version>
-        </dependency>
->>>>>>> parent of deaee41 (attempting to fix the urls):lab4_GameManagement/pom.xml
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee}</version> <!-- Use the version defined in properties -->
             <scope>provided</scope>
         </dependency>
+    
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
             <version>2.3.3</version>
         </dependency>
+        
         <dependency>
-<<<<<<< HEAD:Casino-Microservices-Architecture/lab4_GameManagement/pom.xml
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
             <version>2.34</version>
@@ -81,23 +61,11 @@
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
             <version>2.34</version>
-=======
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>1.19</version>
->>>>>>> parent of deaee41 (attempting to fix the urls):lab4_GameManagement/pom.xml
         </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-servlet</artifactId>
-            <version>1.19</version>
-        </dependency>        
-    
     </dependencies>
     
     <build>
         <plugins>
-<<<<<<< HEAD:Casino-Microservices-Architecture/lab4_GameManagement/pom.xml
             <!-- Upgrade the Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -117,39 +85,16 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.1</version> <!-- Use the latest version -->
-=======
-            <!-- Maven Compiler Plugin for Java 20 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
-                <configuration>
-                    <source>20</source>
-                    <target>20</target>
-                </configuration>
-            </plugin>
-
-            <!-- Update to a newer version of maven-war-plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.0</version> <!-- Updated version -->
->>>>>>> parent of deaee41 (attempting to fix the urls):lab4_GameManagement/pom.xml
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-<<<<<<< HEAD:Casino-Microservices-Architecture/lab4_GameManagement/pom.xml
         
             <!-- Other plugins remain as they are -->
-=======
-
-            <!-- Maven Dependency Plugin to copy dependencies -->
->>>>>>> parent of deaee41 (attempting to fix the urls):lab4_GameManagement/pom.xml
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.2.0</version> <!-- Updated version -->
+                <version>2.6</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -161,15 +106,9 @@
                             <silent>true</silent>
                             <artifactItems>
                                 <artifactItem>
-<<<<<<< HEAD:Casino-Microservices-Architecture/lab4_GameManagement/pom.xml
                                     <groupId>jakarta.platform</groupId>
                                     <artifactId>jakarta.jakartaee-api</artifactId>
                                     <version>${jakartaee}</version>
-=======
-                                    <groupId>javax</groupId>
-                                    <artifactId>javaee-endorsed-api</artifactId>
-                                    <version>7.0</version>
->>>>>>> parent of deaee41 (attempting to fix the urls):lab4_GameManagement/pom.xml
                                     <type>jar</type>
                                 </artifactItem>
                             </artifactItems>
