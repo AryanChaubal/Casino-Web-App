@@ -16,6 +16,5 @@ public class ApplicationConfig extends Application {
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(endpoint.RegisterEndpoint.class);
-        resources.add(endpoint.TestEndpoint.class);
     }
 }
