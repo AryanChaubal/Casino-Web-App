@@ -18,6 +18,7 @@ public class RegisterEndpoint {
         @FormParam("email") String email) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         Register register = new Register();
 
         boolean success = register.registerUser(username, password, email);
@@ -33,6 +34,11 @@ public class RegisterEndpoint {
         // Create an instance of the register class to handle the registration logic
         register registerBusiness = new register();
 
+=======
+        // Create an instance of the register class to handle the registration logic
+        register registerBusiness = new register();
+
+>>>>>>> parent of deaee41 (attempting to fix the urls)
         // We use an HttpServletRequest and HttpServletResponse object for the actual registration
         try {
             // Mimicking the Servlet registration logic here for the RESTful flow
@@ -41,6 +47,9 @@ public class RegisterEndpoint {
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("An error occurred. Please try again.")
+<<<<<<< HEAD
+>>>>>>> parent of deaee41 (attempting to fix the urls)
+=======
 >>>>>>> parent of deaee41 (attempting to fix the urls)
                     .build();
         }

@@ -4,13 +4,18 @@
 
     <groupId>casino</groupId>
     <artifactId>lab4_PaymentManagement</artifactId>
+<<<<<<< HEAD
     <version>1.0-SNAPSHOT</version>
+=======
+    <version>13</version>
+>>>>>>> parent of deaee41 (attempting to fix the urls)
     <packaging>war</packaging>
 
     <name>lab4_PaymentManagement</name>
 
 
     <properties>
+<<<<<<< HEAD
 <<<<<<< HEAD:Casino-Microservices-Architecture/lab4_PaymentManagement/pom.xml
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -19,16 +24,22 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>8.0.0</jakartaee>
 =======
+=======
+>>>>>>> parent of deaee41 (attempting to fix the urls)
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Setting Java version for Maven compilation -->
         <maven.compiler.source>20</maven.compiler.source>
         <maven.compiler.target>20</maven.compiler.target>
+<<<<<<< HEAD
 >>>>>>> parent of deaee41 (attempting to fix the urls):lab4_PaymentManagement/pom.xml
+=======
+>>>>>>> parent of deaee41 (attempting to fix the urls)
     </properties>
     
     <dependencies>
         <dependency>
+<<<<<<< HEAD
 <<<<<<< HEAD:Casino-Microservices-Architecture/lab4_PaymentManagement/pom.xml
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
@@ -36,6 +47,8 @@
         </dependency>
 
 =======
+=======
+>>>>>>> parent of deaee41 (attempting to fix the urls)
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <version>2.3.1</version>
@@ -46,11 +59,18 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.23</version>
         </dependency>
+<<<<<<< HEAD
 >>>>>>> parent of deaee41 (attempting to fix the urls):lab4_PaymentManagement/pom.xml
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee}</version> <!-- Use the version defined in properties -->
+=======
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+>>>>>>> parent of deaee41 (attempting to fix the urls)
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -59,6 +79,7 @@
             <version>2.3.3</version>
         </dependency>
         <dependency>
+<<<<<<< HEAD
 <<<<<<< HEAD:Casino-Microservices-Architecture/lab4_PaymentManagement/pom.xml
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
@@ -86,6 +107,11 @@
             <artifactId>jersey-server</artifactId>
             <version>1.19</version>
 >>>>>>> parent of deaee41 (attempting to fix the urls):lab4_PaymentManagement/pom.xml
+=======
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>1.19</version>
+>>>>>>> parent of deaee41 (attempting to fix the urls)
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
@@ -94,6 +120,7 @@
         </dependency>        
     
     </dependencies>
+<<<<<<< HEAD
 <<<<<<< HEAD:Casino-Microservices-Architecture/lab4_PaymentManagement/pom.xml
     
     <build>
@@ -118,6 +145,8 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.1</version> <!-- Use the latest version -->
 =======
+=======
+>>>>>>> parent of deaee41 (attempting to fix the urls)
 
     <build>
         <plugins>
@@ -137,11 +166,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.0</version> <!-- Updated version -->
+<<<<<<< HEAD
 >>>>>>> parent of deaee41 (attempting to fix the urls):lab4_PaymentManagement/pom.xml
+=======
+>>>>>>> parent of deaee41 (attempting to fix the urls)
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+<<<<<<< HEAD
 <<<<<<< HEAD:Casino-Microservices-Architecture/lab4_PaymentManagement/pom.xml
         
             <!-- Other plugins remain as they are -->
@@ -149,6 +182,10 @@
 
             <!-- Maven Dependency Plugin to copy dependencies -->
 >>>>>>> parent of deaee41 (attempting to fix the urls):lab4_PaymentManagement/pom.xml
+=======
+
+            <!-- Maven Dependency Plugin to copy dependencies -->
+>>>>>>> parent of deaee41 (attempting to fix the urls)
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -164,6 +201,7 @@
                             <silent>true</silent>
                             <artifactItems>
                                 <artifactItem>
+<<<<<<< HEAD
 <<<<<<< HEAD:Casino-Microservices-Architecture/lab4_PaymentManagement/pom.xml
                                     <groupId>jakarta.platform</groupId>
                                     <artifactId>jakarta.jakartaee-api</artifactId>
@@ -173,6 +211,11 @@
                                     <artifactId>javaee-endorsed-api</artifactId>
                                     <version>7.0</version>
 >>>>>>> parent of deaee41 (attempting to fix the urls):lab4_PaymentManagement/pom.xml
+=======
+                                    <groupId>javax</groupId>
+                                    <artifactId>javaee-endorsed-api</artifactId>
+                                    <version>7.0</version>
+>>>>>>> parent of deaee41 (attempting to fix the urls)
                                     <type>jar</type>
                                 </artifactItem>
                             </artifactItems>
@@ -182,4 +225,10 @@
             </plugin>
         </plugins>
     </build>
+<<<<<<< HEAD
 </project>
+=======
+
+
+</project>
+>>>>>>> parent of deaee41 (attempting to fix the urls)

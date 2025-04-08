@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class Register {
 
     public boolean registerUser(String username, String password, String email) {
@@ -21,6 +22,11 @@ public class Register {
 @WebServlet(name = "register", urlPatterns = {"/register"})
 public class register extends HttpServlet {
 
+=======
+@WebServlet(name = "register", urlPatterns = {"/register"})
+public class register extends HttpServlet {
+
+>>>>>>> parent of deaee41 (attempting to fix the urls)
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,6 +74,9 @@ public class register extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("/register.html");
+<<<<<<< HEAD
+>>>>>>> parent of deaee41 (attempting to fix the urls)
+=======
 >>>>>>> parent of deaee41 (attempting to fix the urls)
     }
 }

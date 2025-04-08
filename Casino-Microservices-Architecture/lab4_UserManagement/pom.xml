@@ -19,6 +19,7 @@
     <dependencies>
         <dependency>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <groupId>com.amazonaws</groupId>
     <artifactId>aws-java-sdk-sqs</artifactId>
     <version>1.11.967</version>
@@ -92,6 +93,8 @@
             <artifactId>jersey-server</artifactId>
             <version>2.34</version>
 =======
+=======
+>>>>>>> parent of deaee41 (attempting to fix the urls)
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee}</version>
