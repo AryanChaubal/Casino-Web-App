@@ -1,7 +1,0 @@
-persistence\User_CRUD.class
-endpoint\PlayRequest.class
-endpoint\SlotMachineResource.class
-business\SlotMachineService.class
-business\SlotResult.class
-endpoint\ApplicationConfig.class
-helper\UserInfo.class

@@ -3,7 +3,7 @@ package endpoint;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
-@javax.ws.rs.ApplicationPath("/api")
+@javax.ws.rs.ApplicationPath("webresources")
 public class ApplicationConfig extends Application {
 
     @Override
@@ -16,6 +16,5 @@ public class ApplicationConfig extends Application {
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(endpoint.RegisterEndpoint.class);
-        resources.add(endpoint.TestEndpoint.class);
     }
 }
