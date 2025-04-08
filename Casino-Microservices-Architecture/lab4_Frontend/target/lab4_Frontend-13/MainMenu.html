@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Game Menu</title>
+        <style>
+            body {
+                text-align: center;
+                font-family: Arial, sans-serif;
+            }
+            .menu {
+                margin-top: 50px;
+            }
+            .game-buttons {
+                margin-top: 20px;
+            }
+            button {
+                font-size: 16px;
+                padding: 10px;
+                margin: 10px;
+                cursor: pointer;
+            }
+            .back-button {
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                padding: 10px 15px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Main Menu</h1>
+        <div class="menu">
+            <h2>Select a Game</h2>
+            <div class="game-buttons">
+                <button onclick="location.href = '/game/slots'">Slot Machine</button>
+                <button onclick="alert('Blackjack is not available yet')">Blackjack NOT WORKING</button>
+                <button onclick="alert('Poker is not available yet')">Poker NOT WORKING</button>
+            </div>
+        </div>
+        
+        <button class="back-button" onclick="location.href = '/lab4_Frontend/account.html'">Go Back</button>
+    </body>
+</html>
