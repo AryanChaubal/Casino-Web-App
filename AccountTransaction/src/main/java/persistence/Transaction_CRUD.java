@@ -39,7 +39,7 @@ public class Transaction_CRUD {
             Connection con= getCon();
            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
              LocalDate date = LocalDate.now();
-            String q = "insert into Transactions "
+            String q = "insert into Bet "
                     + "(transactionId, accountId, ammount, TransactionDate) values "
                     + "('"+transactionId+"', "
                     +"'"+accountId+"', "
@@ -61,7 +61,7 @@ public class Transaction_CRUD {
         try{
             Connection con= getCon();
             
-            String q = "select * from Transactions "
+            String q = "select * from Bet "
                     + " WHERE "
                     
                     + "transactionId = '"+transactionId+"';";
