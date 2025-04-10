@@ -5,7 +5,11 @@
  */
 package endpoint;
 
+import io.kubemq.sdk.basic.ServerAddressNotSuppliedException;
+import java.io.IOException;
 import java.io.StringWriter;
+import java.sql.SQLException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Context;
@@ -26,27 +30,33 @@ import business.*;
 import helper.*;
 
 /**
+ * REST Web Service
  *
  * @author student
  */
-@Path("transaction")
+@Path("Transaction")
 public class TransactionResource {
-   
+
     @Context
     private UriInfo context;
-    
-    public TransactionResource(){
-        
+
+    /**
+     * Creates a new instance of TransactionResource
+     */
+    public TransactionResource() {
     }
-    
+
+    /**
+     * Retrieves representation of an instance of endpoint.TransactionResource
+     * @return an instance of java.lang.String
+     */
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    @Path("isActive/{accountId}")
-    public String getXml(@PathParam("accountId") String accountId){
-        System.out.println(accountId);
-        TransactionBusiness rent = new TransactionBusiness();
-        Transaction trans = rent.getTransaction(accountId);
-        if (trans == null) {
+    public String getXml(@PathParam("transactionId") String transactionId) {
+        //TODO return proper representation object
+        TransactionBusiness hold = new TransactionBusiness();
+        Transaction tran = hold.getTransaction(transactionId);
+        if(tran == null){
             return("");
         }
         JAXBContext jaxbContext;
@@ -57,12 +67,12 @@ public class TransactionResource {
 
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             StringWriter sw = new StringWriter();
-            jaxbMarshaller.marshal(trans, sw);
+            jaxbMarshaller.marshal(tran, sw);
 
             return (sw.toString());
 
         } catch (JAXBException ex) {
-            Logger.getLogger(Transaction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TransactionResource.class.getName()).log(Level.SEVERE, null, ex);
             return ("error happened");
         }
     }
@@ -70,13 +80,20 @@ public class TransactionResource {
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Path("update")
-    public String updateCarRent(@FormParam("transactionId") String transactionId, @FormParam("accountId") String accountId, @FormParam("ammount") String ammount){
-        TransactionBusiness trans = new TransactionBusiness();
-        boolean cs = trans.Transaction(transactionId, accountId, ammount);
-        if(cs){
-            return("inserted");
-        }else{
-            return("not inserted");
+    public String updateTransaction(@FormParam("tranid") String transactionId, @FormParam("userid") String accountId,@FormParam("ammount") String ammount) throws InterruptedException, ServerAddressNotSuppliedException{
+        TransactionBusiness transaction = new TransactionBusiness();
+        boolean ts;
+        try{
+            try {
+                ts = transaction.Transaction(transactionId, accountId,ammount);
+            } catch (ServerAddressNotSuppliedException ex) {
+                Logger.getLogger(TransactionResource.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return("Inserted");
+        }catch(ClassNotFoundException | SQLException | IOException ex){
+            Logger.getLogger(TransactionResource.class.getName()).log(Level.SEVERE, null, ex);
+            return (ex.getMessage());
         }
+        
     }
 }

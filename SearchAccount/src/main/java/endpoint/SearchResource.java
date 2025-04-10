@@ -41,7 +41,7 @@ public class SearchResource {
     }
 
     /**
-     * Retrieves representation of an instance of ryerson.ca.searchbook.endpoint.SearchResource
+     * Retrieves representation of an instance of endpoint.SearchResource
      * @return an instance of java.lang.String
      */
     @GET

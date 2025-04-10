@@ -18,15 +18,21 @@ import helper.*;
  * @author student
  */
 public class Account_CRUD {
-    private static Connection getCon(){
-    Connection con=null;
-     try{
-         Class.forName("com.mysql.jdbc.Driver");
-         con=DriverManager.getConnection("jdbc:mysql://localhost:3306/search_LBS?autoReconnect=true&useSSL=false", "root", "student");
-         System.out.println("Connection established.");
-     }
-     catch(Exception e){ System.out.println(e);}
-     return con;
+    private static Connection getCon() {
+        Connection con = null;
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            String connection = System.getenv("DB_URL");
+            //  String connection ="localhost:3306";
+            con = DriverManager.getConnection("jdbc:mysql://" + connection
+                    + "/CasinoSearchService?allowPublicKeyRetrieval=true&useSSL=false", "root", "student");
+
+            System.out.println("Connection established.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return con;
     }
     
     public static Set<Account> searchForAccounts(String query){
