@@ -29,7 +29,7 @@ public class Verify_CRUD {
          Class.forName("com.mysql.jdbc.Driver");
         String connection=System.getenv("DB_URL");
         //String connection ="localhost:3306";
-         con=DriverManager.getConnection("jdbc:mysql://"+connection+"/verify_CARS?allowPublicKeyRetrieval=true&useSSL=false", "root", "student" );
+         con=DriverManager.getConnection("jdbc:mysql://"+connection+"/verify_Transactions?allowPublicKeyRetrieval=true&useSSL=false", "root", "student" );
         
          
          System.out.println("Connection established.");
